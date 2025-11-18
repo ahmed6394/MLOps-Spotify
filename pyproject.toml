@@ -5,10 +5,15 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11.9"
 dependencies = [
+    "asttokens>=3.0.1",
+    "fastapi>=0.121.2",
     "imblearn>=0.0",
+    "ipykernel>=7.1.0",
     "kagglehub>=0.3.13",
+    "mlflow>=3.6.0",
     "pandas>=2.3.3",
     "scikit-learn>=1.7.2",
     "seaborn>=0.13.2",
+    "uvicorn>=0.38.0",
     "xgboost>=3.1.1",
 ]

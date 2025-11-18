@@ -5,6 +5,9 @@ build/
 dist/
 wheels/
 *.egg-info
+mlruns/
+mlartifacts/
+notebook/mlruns
 
 # Virtual environments
 .venv
