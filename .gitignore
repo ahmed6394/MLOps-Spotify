@@ -8,6 +8,7 @@ wheels/
 mlruns/
 mlartifacts/
 notebook/mlruns
+.ruff_cache/
 
 # Virtual environments
 .venv
