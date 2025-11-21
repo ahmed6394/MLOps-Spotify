@@ -18,3 +18,10 @@ python -m uvicorn api.main:app --reload --port 8000
 # Testing
 pytest tests/
 pytest --cov=ml_pipeline tests/
+
+
+# init dagster
+uvx create-dagster@latest project dagster-tutorial
+
+## launch the Dagster UI locally:
+dg dev
