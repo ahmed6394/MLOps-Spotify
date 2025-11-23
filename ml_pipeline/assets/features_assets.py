@@ -1,11 +1,11 @@
 from dagster import asset
 import pandas as pd
-from typing import Dict
 
-POPULARITY_THRESHOLD = 20
+POPULARITY_THRESHOLD = 85
+
 
 @asset
-def feature_engineered_data(cleaned_data: pd.DataFrame) -> pd.DataFrame:
+def feature_engineered_data(clean_data: pd.DataFrame) -> pd.DataFrame:
     """
     Adds feature engineering:
     - artist_song_count
@@ -14,22 +14,20 @@ def feature_engineered_data(cleaned_data: pd.DataFrame) -> pd.DataFrame:
     - long & short duration features
     """
 
-    df = cleaned_data.copy()
+    df = clean_data.copy()
 
     # artist-wise song count
-    df["artist_song_count"] = df.groupby("artist_name")["track_id"].transform("count")
+    df['artist_song_count'] = df.groupby('artist_name')['track_id'].transform('count')
 
     # ensure year column is integer
     df["year"] = df["year"].astype(int)
 
     # yearly popularity quantile
-
     yearly_thresholds = (
         df.groupby("year")["popularity"]
         .quantile(POPULARITY_THRESHOLD / 100)
         .to_dict()
     )
-
 
     # verdict: >= threshold → 1 else 0
     df["verdict"] = df.apply(

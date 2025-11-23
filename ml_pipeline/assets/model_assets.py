@@ -9,9 +9,9 @@ import mlflow.sklearn
 @asset(
     description="Trains ML model using MLFlow tracking",
     required_resource_keys={"mlflow"},
-    compute_kind="ml"
+    compute_kind="ml",
 )
-def trained_model(split_data, mlflow):
+def trained_model(context, split_data):
     """
     Trains a RandomForest model using the split data and logs metrics to MLflow.
     Returns the trained model.
@@ -30,6 +30,7 @@ def trained_model(split_data, mlflow):
     )
 
     # Mlflow tracking
+    mlflow = context.resources.mlflow
     with mlflow.start_run(run_name="rf_model_training"):
 
         model.fit(X_train, y_train)
@@ -46,7 +47,7 @@ def trained_model(split_data, mlflow):
         mlflow.sklearn.log_model(model, artifact_path="model")
 
         # log params
-        mlflow.log_param({"n_estimators": 200, "random_state": 42})
+        mlflow.log_params({"n_estimators": 200, "random_state": 42})
 
         print(f"Accuracy: {acc:.4f}, Fbeta: {fbeta:.4f}")
 
