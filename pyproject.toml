@@ -26,3 +26,6 @@
    [build-system]
    requires = ["hatchling"]
    build-backend = "hatchling.build"
+
+    [tool.dagster]
+    module_name = "ml_pipeline.definitions"
